@@ -1,7 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 const app = express();
-const stuffRoutes = require("./routes/stuff");
+const stuffRoutes = require("./routes/stuff.routes");
+const userRoutes = require("./routes/user.routes");
 
 //Liaison à la DB
 mongoose
@@ -31,5 +33,7 @@ app.use(express.json());
 
 //Import des routes
 app.use("/api/stuff", stuffRoutes);
+app.use("/api/auth", userRoutes);
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;
